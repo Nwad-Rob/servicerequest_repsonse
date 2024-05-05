@@ -11,10 +11,10 @@ import lombok.Data;
 @Builder
 public class MovieRequest  implements Serializable{
     @NotEmpty
-    @Size(min = 3, message = "Supporting role can not be less than 3")
-    String supportingRole;
+    @Size(min = 3, message = "movieId can not be less than 3")
+    long movieid;
 
     @NotEmpty
-    @Size(min = 3,max = 6,message = "Supporting Id can not be lessed than 3 or greater than 6")
-    String supportingId;
+    @Size(min = 3,max = 6,message = "Director's name can not be lessed than 3 or greater than 6")
+    String directorname;
 }

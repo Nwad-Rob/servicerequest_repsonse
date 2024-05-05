@@ -6,8 +6,8 @@ import lombok.Data;
 
 @Data
 @Builder
-public class MovieV {
-    private long movieId;
+public class Movie {
+    private long movieid;
     private String moviename;
     private String directorname;
     private String leadingActor;
