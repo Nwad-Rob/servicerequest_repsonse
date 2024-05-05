@@ -29,39 +29,45 @@ import jakarta.validation.Valid;
 @RequestMapping("/mov/v1")
 public class MovieController {
     @Autowired
-     MovieRepository movieRepo;
-
-
+     MovieService service;
      
 // Get all Movies
 
+@ResponseStatus(HttpStatus.OK)
 @GetMapping("/movies")
 public List<MovieV> getDetails(){
-     return movieRepo.findAll();
+     return service.findAllMovies();
 }
 
 //Create Movies
 @ResponseStatus(HttpStatus.CREATED)
 @PostMapping("/movies")
 public ResponseEntity<MovieV> createMovie(@RequestBody @Valid MovieV e) {
-    MovieV mov =  movieRepo.save(e);
+    MovieV mov =  service.saveMovies(e);
     return ResponseEntity.ok(mov);
 }
 
 //Delete Movies
 @DeleteMapping("{id}")
 public ResponseEntity<HttpStatus> deleteMovie(@PathVariable PrimaryKeys movieid){
-     movieRepo.deleteById(movieid);
+     service.deleteMoviesById(movieid);
      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 }
 
-// //Checking Request
-// @PostMapping("/movieregister")
-// public ResponseEntity<MovieResponse> movRegister(@RequestBody MovieRequest request,
-//                                                  @RequestParam("directorname") String directorname,
-//                                                  @RequestParam("movieid") long movieid ){
-     
-// }
+@PostMapping("/moviebymoviename")
+public ResponseEntity<List<MovieV>> check(@RequestBody @RequestParam("moviename") String moviename){
+     return ResponseEntity.ok(service.checkTest(moviename));
+}
+
+
+
+//Checking Request
+@PostMapping("/movieregister")
+public ResponseEntity<MovieResponse> movRegister(@RequestBody MovieRequest request){
+               System.out.println("Grabbing List");
+               System.out.println(service.getMovies(request));
+          return ResponseEntity.ok(service.getMovies(request));
+}
 
 
 }
