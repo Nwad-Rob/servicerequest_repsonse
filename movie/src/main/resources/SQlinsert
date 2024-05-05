@@ -1,0 +1,7 @@
+INSERT INTO movies VALUES(235,"Hirikoto Mashima","1hr 20min",510000,"Zoro Juro","One Piece");
+
+INSERT INTO movies VALUES(300,"Katsuo Okami","2hr 30min",286420,"Goku Black","DBZ Legends");
+INSERT INTO movies VALUES(421,"Stan Lee","1hr 55min",1210000,"Peter Parker","Spiderman");
+INSERT INTO movies VALUES(358,"Ryan Gosling","1hr 42min",510000,"Zoro Juro","One Piece");
+INSERT INTO movies VALUES(550,"MCU Original","2hr 18min",785000,"Eddie Brock","Venom");
+INSERT INTO movies VALUES(100,"Ben Afleck","2hr 5min",2547000,"Bruce Wayne","Batman");
