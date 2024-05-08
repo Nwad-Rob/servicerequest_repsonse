@@ -19,6 +19,7 @@ import lombok.NoArgsConstructor;
 @IdClass(MovieV.PrimaryKeys.class)
 public class MovieV implements Serializable {
     
+ 
     @SuppressWarnings("unused")
     private static final long serialversionUID = 1l;
 
@@ -36,4 +37,14 @@ public class MovieV implements Serializable {
     private String leadingactor;
     private int grossing;
     private String duration;
+
+    public MovieV(long movieid, String moviename, String directorname, String leadingactor, int grossing, String duration) {
+        movieid = this.movieid;
+        moviename =  this.moviename;
+        directorname = this.directorname;
+        leadingactor = this.leadingactor;
+        grossing = this.grossing;
+        duration = this.duration;
+        
+    }
 }
