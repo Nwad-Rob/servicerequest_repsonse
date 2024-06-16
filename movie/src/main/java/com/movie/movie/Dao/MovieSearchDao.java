@@ -79,11 +79,12 @@ public class MovieSearchDao {
                 predicates.add(directornamePredicate);
         }
 
-        if (request.getMovieid() != 0){
-            Predicate directornamePredicate = criteriaBuilder
-                .like(root.get("movieid"), "%" + request.getDirectorname()+"%" );
-                predicates.add(directornamePredicate);
+        if (request.getMovieid() != 0) {
+            Predicate movieidPredicate = criteriaBuilder
+                .equal(root.get("movieid"), request.getMovieid());
+            predicates.add(movieidPredicate);
         }
+        
 
         criteriaQuery.where(
             criteriaBuilder.or(predicates.toArray(new Predicate[0]))
