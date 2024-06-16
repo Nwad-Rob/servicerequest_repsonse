@@ -11,7 +11,7 @@ import lombok.Data;
 @Builder
 public class MovieRequest  implements Serializable{
     @NotEmpty
-    @Size(min = 2, message = "movieId can not be less than 2")
+    @Size(min = 2, message = "movieId can not be less than 2  ")
     long movieid;
 
     @NotEmpty

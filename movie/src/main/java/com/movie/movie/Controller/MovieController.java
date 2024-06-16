@@ -67,5 +67,12 @@ public ResponseEntity<MovieResponse> movRegister(@RequestBody MovieRequest reque
           return ResponseEntity.ok(service.getMovies(request));
 }
 
+@PostMapping("/moviesearch")
+public ResponseEntity<MovieResponse> movSearch(@RequestBody MovieRequest request){
+               System.out.println("Grabbing List");
+               System.out.println(service.getMoviesWhereMovienameLike(request));
+          return ResponseEntity.ok(service.getMoviesWhereMovienameLike(request));
+}
+
 
 }

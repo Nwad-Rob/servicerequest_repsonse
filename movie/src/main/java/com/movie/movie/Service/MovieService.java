@@ -11,8 +11,10 @@ import com.movie.movie.Entity.MovieV.PrimaryKeys;
 import com.movie.movie.Model.Request.MovieRequest;
 import com.movie.movie.Model.Response.Movie;
 import com.movie.movie.Model.Response.MovieResponse;
+import com.movie.movie.Dao.MovieSearchDao;
 
 import jakarta.validation.Valid;
+import javax.inject.Inject;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -21,6 +23,9 @@ public class MovieService {
     
     @Autowired
     MovieRepository movieRepo;
+
+    @Inject
+    MovieSearchDao appDao;
      
     public MovieResponse getMovies(MovieRequest request){
 
@@ -50,6 +55,19 @@ public class MovieService {
             movieList.add(movie);
         }
         return movieList;
+    }
+
+    public MovieResponse getMoviesWhereMovienameLike(MovieRequest movieRequest){
+        List <MovieV> movieList = null;
+        movieList = appDao.findAllByCriteria(movieRequest);
+
+        if(movieList.isEmpty()){
+            return MovieResponse.builder().build();
+        }
+
+        return MovieResponse.builder()
+        .movieList(movievToMovie(movieList))
+        .build();
     }
     
 

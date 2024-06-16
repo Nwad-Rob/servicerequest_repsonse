@@ -3,6 +3,7 @@ package com.movie.movie;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -58,4 +59,16 @@ public class MovieControllerTest {
         ;
 
     }
+
+    @Test
+    public void testGetEmployees_EmptyList() throws Exception {
+        // Mock the behavior of the repository to return an empty list when findAll() is called
+        when(service.findAllMovies()).thenReturn(Collections.emptyList());
+
+        // Perform the GET request to "/mov/v1"
+        mockMvc.perform(get("/mov/v1"))
+               .andExpect(status().isNotFound()); // Expecting a 404 Not Found response
+    }
+
+    
 }
