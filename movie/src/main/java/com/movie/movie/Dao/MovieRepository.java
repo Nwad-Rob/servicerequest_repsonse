@@ -18,20 +18,20 @@ public interface MovieRepository extends JpaRepository<MovieV, MovieV.PrimaryKey
 
     Optional<MovieV> findByMoviename(String Moviename);
 
-    Optional<MovieV> findByMovieid(long movieid);
+    Optional<MovieV> findByMovieid(String movieid);
 
     Optional<MovieV> findByGrossing(int grossing);
 
     Optional<MovieV> findByDuration(int duration);
 
     @Query(value = "SELECT * FROM Movies WHERE directorname = :directorname AND movieid = :movieid", nativeQuery = true)
-    List<MovieV> moviesByDirector(@Param("directorname") String directorname,@Param("movieid") long movieid);
+    List<MovieV> moviesByDirector(@Param("directorname") String directorname,@Param("movieid") String movieid);
 
     @Query(value = "SELECT * FROM Movies WHERE moviename = :moviename", nativeQuery = true)
     List <MovieV> moviesByMovieName(@Param("moviename")String moviename);
 
-    default List<MovieV> getMovieDetailsByDirectorname( String directorname, long movieid){
-          if (directorname != null && !directorname.trim().isEmpty() && movieid != 0) {
+    default List<MovieV> getMovieDetailsByDirectorname( String directorname, String movieid){
+          if (directorname != null && !directorname.trim().isEmpty() && movieid != null && !movieid.trim().isEmpty()) {
             return moviesByDirector(directorname,movieid);
         }else{
             return null;

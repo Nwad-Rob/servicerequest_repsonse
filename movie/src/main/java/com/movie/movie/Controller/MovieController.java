@@ -61,7 +61,7 @@ public ResponseEntity<List<MovieV>> check(@RequestBody @RequestParam("moviename"
 
 //Checking Request
 @PostMapping("/movieregister")
-public ResponseEntity<MovieResponse> movRegister(@RequestBody MovieRequest request){
+public ResponseEntity<MovieResponse> movRegister(@Valid @RequestBody MovieRequest request){
                System.out.println("Grabbing List");
                System.out.println(service.getMovies(request));
           return ResponseEntity.ok(service.getMovies(request));
@@ -72,6 +72,12 @@ public ResponseEntity<MovieResponse> movSearch(@RequestBody MovieRequest request
                System.out.println("Grabbing List");
                System.out.println(service.getMoviesWhereMovienameLike(request));
           return ResponseEntity.ok(service.getMoviesWhereMovienameLike(request));
+}
+
+@PostMapping("/moviereplace")
+public ResponseEntity<MovieResponse> movReplace(@RequestBody MovieRequest request){
+               System.out.println("Grabbing Replace List");
+          return ResponseEntity.ok(service.getMoviesReplaced(request));
 }
 
 

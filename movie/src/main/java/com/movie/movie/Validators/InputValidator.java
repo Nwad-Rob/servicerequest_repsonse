@@ -10,7 +10,7 @@ import jakarta.validation.ConstraintValidatorContext;
 
 public class InputValidator implements ConstraintValidator<ValidateInputs,Object> {
 
-    private long movieid;
+    private String movieid;
     private String directorname;
 
     enum ValidationStatus{
@@ -25,7 +25,7 @@ public class InputValidator implements ConstraintValidator<ValidateInputs,Object
     
     @Override
     public boolean isValid(Object object, ConstraintValidatorContext constraint) {
-        Field movieidField = FieldUtils.getField(object.getClass(), Long.toString(movieid), true); 
+        Field movieidField = FieldUtils.getField(object.getClass(), movieid, true); 
         Field directornameField = FieldUtils.getField(object.getClass(), directorname, true);
         ValidationStatus validationStatus = ValidationStatus.Pending;
 

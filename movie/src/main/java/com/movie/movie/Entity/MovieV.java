@@ -26,11 +26,11 @@ public class MovieV implements Serializable {
     @Data
     public static class PrimaryKeys implements Serializable{
         private String directorname;
-        private long movieid;
+        private String movieid;
     }
 
     @Id
-    private long movieid;
+    private String movieid;
     private String moviename;
     @Id
     private String directorname;
@@ -38,7 +38,7 @@ public class MovieV implements Serializable {
     private int grossing;
     private String duration;
 
-    public MovieV(long movieid, String moviename, String directorname, String leadingactor, int grossing, String duration) {
+    public MovieV(String movieid, String moviename, String directorname, String leadingactor, int grossing, String duration) {
         movieid = this.movieid;
         moviename =  this.moviename;
         directorname = this.directorname;

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.movie.movie.Entity.MovieV;
 import com.movie.movie.Model.Request.MovieRequest;
+import com.movie.movie.Model.Response.Movie;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -16,7 +17,9 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class MovieSearchDao {
@@ -64,6 +67,29 @@ public class MovieSearchDao {
 
     }
 
+    public List<MovieV> findByReplacement(MovieRequest request){
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<MovieV> criteriaQuery = criteriaBuilder.createQuery(MovieV.class);
+
+        //Select from Movies
+        Root<MovieV> root = criteriaQuery.from(MovieV.class);
+        
+        
+        //Create Predicates
+        Predicate movieIdPredicate = criteriaBuilder.equal(root.get("movieid"), request.getMovieid());
+        Predicate directorNamePredicate = criteriaBuilder.equal(root.get("directorname"), request.getDirectorname());
+        
+        
+        //Combine Predicates
+        criteriaQuery.where(criteriaBuilder.and(movieIdPredicate,directorNamePredicate));
+
+        TypedQuery<MovieV> typedQuery = entityManager.createQuery(criteriaQuery);
+        
+        return typedQuery.getResultList();
+
+    }
+
+
     public List<MovieV> findAllByCriteria(MovieRequest request){
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<MovieV> criteriaQuery = criteriaBuilder.createQuery(MovieV.class);
@@ -79,13 +105,14 @@ public class MovieSearchDao {
                 predicates.add(directornamePredicate);
         }
 
-        if (request.getMovieid() != 0) {
+        if (request.getMovieid() != null) {
             Predicate movieidPredicate = criteriaBuilder
                 .equal(root.get("movieid"), request.getMovieid());
             predicates.add(movieidPredicate);
         }
         
 
+        
         criteriaQuery.where(
             criteriaBuilder.or(predicates.toArray(new Predicate[0]))
         );
@@ -102,5 +129,7 @@ public class MovieSearchDao {
     public void setEntityManager(EntityManager entityManager){
         this.entityManager =  entityManager;
     }
+
+    
 
 }

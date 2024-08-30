@@ -20,6 +20,6 @@ public @interface ValidateInputs {
     Class<?>[] groups() default {};
     Class<? extends Payload> [] payload() default{};
     
-    long movieid();
+    String movieid();
     String directorname();
 }
